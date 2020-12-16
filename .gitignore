@@ -1,0 +1,21 @@
+# Rust
+/target
+
+# Python
+__pycache__
+.pytest_cache
+*.pyc
+venv
+env
+vscode-venv
+.mypy_cache
+
+# Dist and build directories
+dist
+build
+static
+*.egg-info
+
+# Project specific
+/data
+.vscode
