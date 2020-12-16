@@ -1,0 +1,43 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index fd67ae0..8579bc6 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -85,6 +85,14 @@ check_function_exists ( _fstati64 HAVE__FSTATI64 )
+ check_function_exists ( fileno HAVE_FILENO )
+ check_function_exists ( _fileno HAVE__FILENO )
+ 
++include (TestBigEndian)
++TEST_BIG_ENDIAN(WORDS_BIGENDIAN)
++if (WORDS_BIGENDIAN)
++  message(STATUS "System is big-endian.")
++else (WORDS_BIGENDIAN)
++  message(STATUS "System is little-endian.")
++endif (WORDS_BIGENDIAN)
++
+ include(CheckTypeSize)
+ check_type_size ( "long" SIZEOF_LONG )
+ check_type_size ( "long long" SIZEOF_LONG_LONG )
+@@ -100,7 +108,7 @@ if(WIN32)
+   # CheckCSourceRuns checking for "%zu" succeeds but still gives warnings on win32.
+   set(HAVE_PRINTF_Z OFF)
+   # Not using unsupported %zu generates warnings about using %I64 with MinGW.
+-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-format")
++  # set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-format")
+   message (STATUS "Compiling to Win32 - printf \"%zu\" size_t formatting support disabled")
+ elseif(CMAKE_CROSSCOMPILING)
+   # CheckCSourceRuns doesn't work when cross-compiling; assume C99 compliant support.
+@@ -111,14 +119,6 @@ else()
+   check_c_source_runs("#include <stdio.h>\nint main(){char o[8];sprintf(o, \"%zu\", (size_t)7);return o[0] != '7';}" HAVE_PRINTF_Z)
+ endif()
+ 
+-include (TestBigEndian)
+-TEST_BIG_ENDIAN(WORDS_BIGENDIAN)
+-if (WORDS_BIGENDIAN)
+-  message(STATUS "System is big-endian.")
+-else (WORDS_BIGENDIAN)
+-  message(STATUS "System is little-endian.")
+-endif (WORDS_BIGENDIAN)
+-
+ # OS X
+ if(APPLE)
+   set(CMAKE_MACOSX_RPATH ON)
