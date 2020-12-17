@@ -16,7 +16,7 @@ here = os.path.abspath(os.path.dirname(__file__))
 # Import the README and use it as the long-description.
 # Note: this will only work if 'README.md' is present in your MANIFEST.in file!
 try:
-    with io.open(os.path.join(here, 'README.md'), encoding='utf-8') as f:
+    with io.open(os.path.join(here, "README.md"), encoding="utf-8") as f:
         long_description = '\n' + f.read()
 except FileNotFoundError:
     long_description = DESCRIPTION
@@ -24,10 +24,10 @@ except FileNotFoundError:
 about = {}
 if not VERSION:
     project_slug = NAME.lower().replace("-", "_").replace(" ", "_")
-    with open(os.path.join(here, "package", project_slug, '__version__.py')) as f:
+    with open(os.path.join(here, "package", project_slug, "__version__.py")) as f:
         exec(f.read(), about)
 else:
-    about['__version__'] = VERSION
+    about["__version__"] = VERSION
 
 
 class TestCommand(Command):
@@ -48,7 +48,8 @@ class TestCommand(Command):
 setup(
     name=NAME,
     version=about["__version__"],
-    packages=find_packages(),
+    package_dir={"": "package"},
+    packages=find_packages("package"),
     description=DESCRIPTION,
     long_description=long_description,
     long_description_content_type='text/markdown',
