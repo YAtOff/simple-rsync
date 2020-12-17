@@ -67,7 +67,7 @@ setup(
     python_requires=">=3.7",
     tests_require=["pytest>=6", "flake8>=3"],
     cmdclass={"test": TestCommand},
-    rust_extensions=[RustExtension("simple_rsync", "Cargo.toml", debug=False)],
+    rust_extensions=[RustExtension("simple_rsync.simple_rsync", "Cargo.toml", debug=False)],
     include_package_data=True,
     zip_safe=False
 )
