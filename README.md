@@ -8,7 +8,7 @@
 
 1. Make sure Rust toolchain is installed. If not goto https://rustup.rs/ to install it.
 2. Create an virtual environment and run: `python setup.py develop` for develop build 
-or `python setup.py install` for release build
+or `python setup.py bdist_wheel` for release build
 
 ## Verify
 
@@ -35,8 +35,4 @@ with open(new_file, "rb") as expected:
         assert expected.read() == result.read()
 ```
 
-## Release on Mac OSX
-
-Set `MACOSX_DEPLOYMENT_TARGET` if you want the wheel to be compatible with older versions.
-For CPython from Python.org: `MACOSX_DEPLOYMENT_TARGET=10.9 python setup.py bdist_wheel`.
-For custom bulid of `librsync` again see the instructions for Windows.
+For OS specific instructions see the `mac` and `windows` folders.

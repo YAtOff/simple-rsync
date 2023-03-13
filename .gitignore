@@ -6,6 +6,7 @@ __pycache__
 .pytest_cache
 *.pyc
 venv
+venv3*
 env
 vscode-venv
 .mypy_cache
